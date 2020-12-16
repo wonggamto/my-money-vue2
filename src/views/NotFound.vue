@@ -1,5 +1,11 @@
 <template>
-    <div>404</div>
+    <div>404
+      <div>
+        <router-link to="/">
+          返回首页
+        </router-link>
+      </div>
+    </div>
 </template>
 
 <script lang="ts">
