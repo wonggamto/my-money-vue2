@@ -25,7 +25,5 @@
       components: {Icon}
     }
 </script>
-
 <style lang="scss" scoped>
-
 </style>
