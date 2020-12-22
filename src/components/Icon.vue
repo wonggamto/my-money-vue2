@@ -13,6 +13,8 @@
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/reset.scss";
+@import "~@/assets/style/helper.scss";
 .icon {
   width: 24px; height: 24px;
   vertical-align: -0.15em;
