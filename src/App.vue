@@ -15,6 +15,7 @@ body{
   font-family: $font-hei;
   background: #F8FAFB;
 }
+
 </style>
 <script>
 export default {
