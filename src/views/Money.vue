@@ -1,42 +1,7 @@
 <template>
-  <Layout>
-    <div class="topBar">
-      <Icon name="back"/>
-      <ul class="types">
-        <li class="selected">支出</li>
-        <li>收入</li>
-      </ul>
-      <Icon name=""/>
-    </div>
-    <div class="tags">
-      <ul class="current">
-        <li>衣</li>
-        <li>食</li>
-        <li>住</li>
-        <li>行</li>
-      </ul>
-      <div class="new">
-        <button>
-          <Icon name="add" class="add"/>
-        </button>
-      </div>
-    </div>
-    <div class="output">
-      <Icon name="rmb"/>
-      <span>100</span>
-    </div>
-    <div class="date">
-      <Icon name="calendar"/>
-      <span>2020.12.22</span>
-    </div>
-    <div>
-      <label class="notes">
-        <span class="name">
-          <Icon name="note"/>
-        </span>
-        <input type="text" placeholder="输入备注">
-      </label>
-    </div>
+  <Layout class-prefix="layout">
+
+
     <div class="numberPad">
       <button>1</button>
       <button>2</button>
@@ -53,6 +18,56 @@
       <button class="zero">0</button>
       <button>.</button>
     </div>
+
+    <div class="output">
+      <Icon name="rmb"/>
+      <span>100</span>
+    </div>
+    <div class="date">
+      <Icon name="calendar"/>
+      <span>2020.12.22</span>
+    </div>
+    <div>
+      <label class="notes">
+        <span class="name">
+          <Icon name="note"/>
+        </span>
+        <input type="text" placeholder="输入备注">
+      </label>
+    </div>
+
+    <div class="tags">
+      <ul class="current">
+        <li>衣</li>
+        <li>食</li>
+        <li>住</li>
+        <li>行</li>
+        <li>行</li>
+        <li>行</li>
+        <li>行</li>
+        <li>行</li>
+        <li>行</li>
+        <li>行</li>
+        <li>行</li>
+        <li>行</li>
+        <li>行</li>
+        <li class="new">
+          <button>
+            <Icon name="add" class="add"/>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="topBar">
+      <Icon name="back"/>
+      <ul class="types">
+        <li class="selected">支出</li>
+        <li>收入</li>
+      </ul>
+      <Icon name=""/>
+    </div>
   </Layout>
 </template>
 <script lang="ts">
@@ -64,15 +79,23 @@ export default {
   components: {Icon, Layout},
 };
 </script>
+<style lang="scss">
+  .layout-content{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+</style>
 <style lang="scss" scoped>
 @import "~@/assets/style/reset.scss";
 @import "~@/assets/style/helper.scss";
 .tags {
   > .current {
     display: flex;
-    justify-content: space-between;
-    margin: 24px;
-
+    margin: 6px 0;
+    flex-wrap: wrap;
+    overflow: auto;
+    flex-grow: 1;
+    padding-left: 12px;
     > li {
       display: flex;
       align-items: center;
@@ -81,6 +104,7 @@ export default {
       width: 64px;
       border-radius: 30%;
       background: #F5F5F5;
+      margin: 6px 12px;
 
     }
   }
