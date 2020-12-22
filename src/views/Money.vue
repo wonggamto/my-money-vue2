@@ -29,8 +29,10 @@
     </div>
     <div>
       <label class="notes">
-        <span class="name">备注</span>
-        <input type="text">
+        <span class="name">
+          <Icon name="note"/>
+        </span>
+        <input type="text" placeholder="输入备注">
       </label>
     </div>
     <div class="numberPad">
@@ -125,7 +127,24 @@ export default {
       border-radius: 16px;
       background: #FFF;
       //border: 1px solid green;
+}
     }
   }
+.notes{
+  background: #FFF;
+  font-size: 18px;
+  padding-left: 18px;
+  display: flex;
+  align-items: center;
+  > .name{
+    padding-right: 16px;
+  }
+  input{
+    padding: 4px 16px 4px 0;
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+  }
+
 }
 </style>
