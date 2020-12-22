@@ -108,7 +108,7 @@ export default {
   text-align: center;
   padding: 8px 24px;
   background: #464699;
-  color:black;
+  color:#FFF;
   font-size: 18px;
   >.types {
     display: flex;
@@ -124,10 +124,12 @@ export default {
       align-items: center;
       justify-content: center;
       margin: 0 4px;
-      border-radius: 16px;
-      background: #FFF;
-      //border: 1px solid green;
-}
+      &.selected{
+        background: #FFF;
+        border-radius: 16px;
+        color:black;
+      }
+    }
     }
   }
 .notes{
