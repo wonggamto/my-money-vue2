@@ -1,15 +1,17 @@
 <template>
-    <Layout>
-      labels
-    </Layout>
+  <Layout>
+    labels
+    <Nav/>
+  </Layout>
 </template>
 
 <script lang="ts">
 import Layout from '@/components/Layout.vue';
+import Nav from '@/components/Nav.vue';
 
 export default {
   name: 'Labels',
-  components: {Layout}
+  components: {Nav, Layout}
 };
 </script>
 

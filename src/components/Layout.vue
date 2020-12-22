@@ -3,15 +3,12 @@
     <div class="content">
       <slot/>
     </div>
-    <Nav/>
   </div>
 </template>
 
 <script lang="ts">
-import Nav from '@/components/Nav.vue';
 export default {
   name: 'Layout',
-  components: {Nav}
 };
 </script>
 
