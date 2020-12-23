@@ -11,11 +11,13 @@
 <script lang="ts">
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
+import Vue from 'vue'
+import {Component} from 'vue-property-decorator';
 
-export default {
-  name: 'TopBar',
-  components: {Icon, Layout}
-};
+@Component({components:{Icon,Layout}})
+export default class TopBar extends Vue{
+
+}
 </script>
 
 <style lang="scss" scoped>

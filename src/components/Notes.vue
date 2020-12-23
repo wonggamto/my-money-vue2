@@ -4,23 +4,33 @@
         <span class="name">
           <Icon name="note"/>
         </span>
-      <input type="text" placeholder="输入备注">
+      <input type="text" :value="value"
+             @change="onInput"
+             placeholder="输入备注">
     </label>
   </div>
 </template>
 
 <script lang="ts">
 import Icon from '@/components/Icon.vue';
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
 
-export default {
-  name: 'Notes',
-  components:{Icon}
-};
+@Component({components: {Icon}})
+export default class Notes extends Vue {
+  value = '';
+
+  onInput(event: KeyboardEvent) {
+    const input = event.target as HTMLInputElement;
+    this.value = input.value;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 @import "~@/assets/style/reset.scss";
 @import "~@/assets/style/helper.scss";
+
 .notes {
   background: #FFF;
   font-size: 18px;
@@ -28,6 +38,7 @@ export default {
   display: flex;
   align-items: center;
   max-height: 100%;
+
   > .name {
     padding-right: 16px;
   }

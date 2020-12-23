@@ -18,9 +18,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
+import Icon from '@/components/Icon.vue';
 
 
-@Component
+@Component({components:{Icon}})
 export default class Category extends Vue {
   type = '-';
   selectType(type: string) {
