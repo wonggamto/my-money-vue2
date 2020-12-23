@@ -15,12 +15,9 @@
       <li>行</li>
       <li>行</li>
       <li class="new">
-        <button>
-          <Icon name="add" class="add"/>
-        </button>
+          <Icon name="add"/>
       </li>
     </ul>
-
   </div>
 </template>
 
@@ -29,16 +26,20 @@ import Icon from '@/components/Icon.vue';
 
 export default {
   name: 'Tags',
-  comments: {Icon}
+  components: {Icon}
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~@/assets/style/reset.scss";
 @import "~@/assets/style/helper.scss";
+
 .tags {
   height: 30%;
   overflow: auto;
+  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
   > .current {
     display: flex;
     margin: 6px 0;
@@ -55,24 +56,27 @@ export default {
       border-radius: 30%;
       background: #F5F5F5;
       margin: 6px 12px;
-
-      .new {
-        > button {
-          display: flex;
-          width: 64px;
-          height: 64px;
-          justify-content: center;
-          align-items: center;
-          border-radius: 30%;
-          margin: 24px;
-          background: #F5F5F5;
-
-          > .add {
-            width: 68px;
-            height: 68px;
-          }
-        }
+      flex-direction: column;
+      > .new{
+        font-size: 12px;
       }
+
+      //> .new {
+      //  display: flex;
+      //  flex-direction: column;
+      //  > button {
+      //    display: flex;
+      //    width: 64px;
+      //    height: 64px;
+      //    justify-content: center;
+      //    align-items: center;
+      //    border-radius: 30%;
+      //    margin: 24px;
+      //    background: #F5F5F5;
+      //    flex-direction: column;
+      //
+      //  }
+      //}
     }
   }
 }

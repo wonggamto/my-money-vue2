@@ -10,7 +10,7 @@ import Icon from '@/components/Icon.vue';
 
 export default {
   name: 'outPut',
-  comments: {Icon}
+  components:{Icon}
 };
 </script>
 

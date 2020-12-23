@@ -14,7 +14,7 @@ import Icon from '@/components/Icon.vue';
 
 export default {
   name: 'Notes',
-  comments:{Icon}
+  components:{Icon}
 };
 </script>
 

@@ -9,7 +9,7 @@
 import Icon from '@/components/Icon.vue';
 export default {
   name: 'Date',
-  comments:{Icon}
+  components:{Icon}
 };
 </script>
 
