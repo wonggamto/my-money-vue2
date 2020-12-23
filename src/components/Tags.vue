@@ -1,21 +1,12 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
-      <li>行</li>
+      <li v-for="tag in dataSource" :key="tag"
+          :class="{selected: selectedTags.indexOf(tag)>=0}"
+          @click="toggle(tag)">{{ tag }}
+      </li>
       <li class="new">
-          <Icon name="add"/>
+        <Icon name="add"/>
       </li>
     </ul>
   </div>
@@ -23,11 +14,23 @@
 
 <script lang="ts">
 import Icon from '@/components/Icon.vue';
+import Vue from 'vue';
+import {Component, Prop} from 'vue-property-decorator';
 
-export default {
-  name: 'Tags',
-  components: {Icon}
-};
+@Component({components: {Icon}})
+export default class Tags extends Vue {
+  @Prop() dataSource: string[] | undefined;
+  selectedTags: string[] = [];
+
+  toggle(tag: string) {
+    const index = this.selectedTags.indexOf(tag);
+    if (index >= 0) {
+      this.selectedTags.splice(index, 1);
+    } else {
+      this.selectedTags.push(tag);
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -40,6 +43,7 @@ export default {
   font-size: 14px;
   display: flex;
   flex-wrap: wrap;
+
   > .current {
     display: flex;
     margin: 6px 0;
@@ -47,6 +51,7 @@ export default {
     overflow: auto;
     flex-grow: 1;
     padding-left: 12px;
+
     > li {
       display: flex;
       align-items: center;
@@ -57,26 +62,14 @@ export default {
       background: #F5F5F5;
       margin: 6px 12px;
       flex-direction: column;
-      > .new{
-        font-size: 12px;
+
+      &.selected {
+        background: #DDD;
       }
 
-      //> .new {
-      //  display: flex;
-      //  flex-direction: column;
-      //  > button {
-      //    display: flex;
-      //    width: 64px;
-      //    height: 64px;
-      //    justify-content: center;
-      //    align-items: center;
-      //    border-radius: 30%;
-      //    margin: 24px;
-      //    background: #F5F5F5;
-      //    flex-direction: column;
-      //
-      //  }
-      //}
+      > .new {
+        font-size: 12px;
+      }
     }
   }
 }
