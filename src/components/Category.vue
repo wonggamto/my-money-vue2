@@ -4,20 +4,32 @@
       <Icon name="back"/>
     </router-link>
     <ul class="types">
-      <li class="selected">支出</li>
-      <li>收入</li>
+      <li :class="type === '-' && 'selected'"
+          @click="selectType('-')">支出
+      </li>
+      <li :class="type === '+' && 'selected'"
+          @click="selectType('+')">收入
+      </li>
     </ul>
     <Icon name=""/>
   </div>
 </template>
 
 <script lang="ts">
-import Icon from '@/components/Icon.vue';
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
 
-export default {
-  name: 'Category',
-  components:{Icon}
-};
+
+@Component
+export default class Category extends Vue {
+  type = '-';
+  selectType(type: string) {
+    if (type !== '-' && type !== '+') {
+      throw new Error('type is unknown');
+    }
+    this.type = type;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
