@@ -4,7 +4,7 @@
     <OutPut/>
     <Date/>
     <Notes/>
-    <Tags :data-source="tags"/>
+    <Tags :data-source.sync="tags"/>
     <Category/>
   </Layout>
 </template>
@@ -22,7 +22,7 @@ export default {
   components: {Category, Tags, Notes, OutPut, NumberPad, Layout, Date},
   data() {
     return {
-      tags: ['衣', '食', '住', '行','1','2']
+      tags: ['衣', '食', '住', '行']
     }
   }
 };
