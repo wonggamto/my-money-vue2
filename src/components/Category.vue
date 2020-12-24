@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Watch} from 'vue-property-decorator';
 import Icon from '@/components/Icon.vue';
 
 
@@ -30,6 +30,10 @@ export default class Category extends Vue {
     }
     this.type = type;
   }
+  @Watch('type')
+    onTypeChanged(value: string){
+      this.$emit('update:value',value)
+    }
 }
 </script>
 
