@@ -22,13 +22,13 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 
 @Component
+
 export default class NumberPad extends Vue {
-  // output:string = '';
+
   inputContent(event: MouseEvent) {
     const button = (event.target as HTMLButtonElement);
-    const input = button.textContent
-    console.log(input);
-
+    const value = button.textContent;
+    this.$emit('update:value', value);
   }
 }
 </script>

@@ -1,22 +1,26 @@
 <template>
   <div class="output">
     <Icon name="rmb"/>
-    <span>100</span>
+    <span>0</span>
   </div>
 </template>
 
 <script lang="ts">
 import Icon from '@/components/Icon.vue';
+import Vue from 'vue';
+import {Component, Prop} from 'vue-property-decorator';
 
-export default {
-  name: 'outPut',
-  components:{Icon}
-};
+@Component({components: {Icon}})
+export default class OutPut extends Vue {
+
+
+}
 </script>
 
 <style lang="scss" scoped>
 @import "~@/assets/style/reset.scss";
 @import "~@/assets/style/helper.scss";
+
 .output {
   font-size: 24px;
   display: flex;
