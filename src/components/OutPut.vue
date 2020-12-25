@@ -1,7 +1,7 @@
 <template>
   <div class="output">
     <Icon name="rmb"/>
-    <span>0</span>
+    <span>{{record}}</span>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component({components: {Icon}})
 export default class OutPut extends Vue {
-
+  @Prop({default:'0'}) record!: string;
 
 }
 </script>

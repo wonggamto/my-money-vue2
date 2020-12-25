@@ -1,7 +1,7 @@
 <template>
   <Layout class-prefix="layout">
     <NumberPad @update:value="onGetNumber"/>
-    <OutPut/>
+    <OutPut :record="record.amount"/>
     <Date/>
     <Notes @update:value="onUpdateNotes"/>
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
@@ -26,7 +26,7 @@ type Record = {
   output: string;
   type: string;
   date: string;
-  amount: string;
+  amount: number;
 }
 @Component(
     {
@@ -37,8 +37,7 @@ type Record = {
     })
 export default class Money extends Vue {
   tags = ['衣', '食', '住', '行'];
-  record: Record = {tags: [], notes: '', type: '-', amount: '0', output: '0', date: ''};
-
+  record: Record = {tags: [], notes: '', type: '-', amount: 0, output: '0', date: ''};
   onUpdateTags(value: string[]) {
     this.record.tags = value;
   }
@@ -52,7 +51,7 @@ export default class Money extends Vue {
   }
 
   onGetNumber(value: string) {
-    this.record.amount = value;
+    this.record.amount = parseFloat(value);
   }
 
 
