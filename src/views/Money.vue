@@ -26,7 +26,7 @@ type Record = {
   output: string;
   type: string;
   date: string;
-  amount: number;
+  amount: string;
 }
 @Component(
     {
@@ -37,7 +37,7 @@ type Record = {
     })
 export default class Money extends Vue {
   tags = ['衣', '食', '住', '行'];
-  record: Record = {tags: [], notes: '', type: '-', amount: 0, output: '0', date: ''};
+  record: Record = {tags: [], notes: '', type: '-', amount: '0', output: '0', date: ''};
   onUpdateTags(value: string[]) {
     this.record.tags = value;
   }
@@ -51,7 +51,7 @@ export default class Money extends Vue {
   }
 
   onGetNumber(value: string) {
-    this.record.amount = parseFloat(value);
+    this.record.amount = value;
   }
 
 

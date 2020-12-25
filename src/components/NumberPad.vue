@@ -3,15 +3,15 @@
     <button @click="inputContent">1</button>
     <button @click="inputContent">2</button>
     <button @click="inputContent">3</button>
-    <button>删除</button>
+    <button @click="remove">删除</button>
     <button @click="inputContent">4</button>
     <button @click="inputContent">5</button>
     <button @click="inputContent">6</button>
-    <button>清空</button>
+    <button @click="clear">清空</button>
     <button @click="inputContent">7</button>
     <button @click="inputContent">8</button>
     <button @click="inputContent">9</button>
-    <button class="ok">ok</button>
+    <button @click="ok" class="ok">ok</button>
     <button class="zero" @click="inputContent">0</button>
     <button @click="inputContent">.</button>
   </div>
@@ -22,12 +22,46 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 
 @Component
-
 export default class NumberPad extends Vue {
+  output = '0';
+
   inputContent(event: MouseEvent) {
     const button = (event.target as HTMLButtonElement);
-    const value = button.textContent;
-    this.$emit('update:value', value);
+    const value = button.textContent as string;
+    if (this.output.length === 16) {return;}
+    if (this.output === '0') {
+      if ('0213456789'.indexOf(value) >= 0) {
+        this.output = value;
+        this.$emit('update:value', this.output);
+      } else {
+        this.output += value;
+        this.$emit('update:value', this.output);
+      }
+      return;
+    }
+    if (this.output.indexOf('.') >= 0 && value === '.') {
+      return;
+    }
+    this.output += value;
+    this.$emit('update:value', this.output);
+  }
+
+  remove() {
+    if (this.output.length === 1) {
+      this.output = '0';
+    } else {
+      this.output = this.output.substring(0, this.output.length - 1);
+    }
+    this.$emit('update:value', this.output);
+  }
+
+  clear() {
+    this.output = '0';
+    this.$emit('update:value', this.output);
+  }
+
+  ok() {
+    //TODO
   }
 }
 </script>
