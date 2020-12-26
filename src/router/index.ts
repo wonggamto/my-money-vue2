@@ -4,7 +4,6 @@ import Statistics from '@/views/Statistics.vue';
 import Money from '@/views/Money.vue';
 import Labels from '@/views/Labels.vue';
 import NotFound from '@/views/NotFound.vue';
-import TestDate from '@/components/TestDate.vue';
 
 Vue.use(VueRouter);
 
@@ -14,21 +13,20 @@ const routes: Array<RouteConfig> = [
     redirect: '/statistics'
   },
   {
-    path:'/money',
-    component:Money
+    path: '/money',
+    component: Money
   },
   {
-    path:'/statistics',
-    component:Statistics
+    path: '/statistics',
+    component: Statistics
   },
   {
-    path:'/labels',
-    component:Labels
+    path: '/labels',
+    component: Labels
   },
-
   {
-    path:'*',
-    component:NotFound
+    path: '*',
+    component: NotFound
   }
 ];
 

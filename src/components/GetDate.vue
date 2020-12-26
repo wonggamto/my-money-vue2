@@ -27,7 +27,7 @@ export default {
             picker.$emit('pick', new Date());
           }
       },
-      value: '2020-1-1'
+      value:''
     }
   },
 }
