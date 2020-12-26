@@ -2,11 +2,11 @@
   <Layout class-prefix="layout">
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     <OutPut :record="record.amount"/>
-    <Date/>
+    <Date v-bind="record.date"/>
     <Notes @update:value="onUpdateNotes"/>
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
     <Category :value.sync="record.type"/>
-    {{ record }}
+    {{ recordList }}
   </Layout>
 </template>
 <script lang="ts">
@@ -37,8 +37,8 @@ type Record = {
     })
 export default class Money extends Vue {
   tags = ['衣', '食', '住', '行'];
-  record: Record = {tags: [], notes: '', type: '-', amount: 8888, output: '0', date: ''};
-  recordList: Record[] = [];
+  record: Record = {tags: [], notes: '', type: '-', amount: 0, output: '0', date: ''};
+  recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
 
   onUpdateTags(value: string[]) {
     this.record.tags = value;
@@ -56,7 +56,7 @@ export default class Money extends Vue {
   saveRecord() {
     const record2 = JSON.parse(JSON.stringify(this.record));
     this.recordList.push(record2);
-    console.log(this.recordList);
+    // console.log(this.recordList);
   }
 
   @Watch('recordList')

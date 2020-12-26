@@ -4,6 +4,7 @@ import Statistics from '@/views/Statistics.vue';
 import Money from '@/views/Money.vue';
 import Labels from '@/views/Labels.vue';
 import NotFound from '@/views/NotFound.vue';
+import TestDate from '@/components/TestDate.vue';
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,10 @@ const routes: Array<RouteConfig> = [
   {
     path:'/labels',
     component:Labels
+  },
+  {
+    path:'/date',
+    component:TestDate
   },
   {
     path:'*',
