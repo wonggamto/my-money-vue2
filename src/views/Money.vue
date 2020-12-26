@@ -6,7 +6,6 @@
     <Notes @update:value="onUpdateNotes"/>
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
     <Category :value.sync="record.type"/>
-    {{ recordList }}
   </Layout>
 </template>
 <script lang="ts">
@@ -62,7 +61,6 @@ export default class Money extends Vue {
   saveRecord() {
     const record2: Record = JSON.parse(JSON.stringify(this.record));
     this.recordList.push(record2);
-    // console.log(this.recordList);
   }
 
   @Watch('recordList')

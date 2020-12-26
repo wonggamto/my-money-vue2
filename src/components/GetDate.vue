@@ -5,11 +5,12 @@
       <el-date-picker
           v-model="value"
           type="datetime"
-          :change="pickerOptions.onClick"
+          @change="onClick"
           size="mini"
+          format="yyyy-MM-dd HH:mm:ss"
+          value-format="yyyy-MM-dd HH:mm:ss"
           placeholder="选择日期时间">
       </el-date-picker>
-        {{value}}
     </div>
   </div>
 </template>
@@ -22,14 +23,15 @@ export default {
   components: {Icon},
   data() {
     return {
-      pickerOptions: {
-          onClick(picker) {
-            picker.$emit('pick', new Date());
-          }
-      },
       value:''
     }
   },
+  methods:{
+      onClick() {
+        this.$emit('update:value', this.value);
+
+    },
+  }
 }
 </script>
 
