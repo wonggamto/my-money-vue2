@@ -5,11 +5,11 @@
       <el-date-picker
           v-model="value"
           type="datetime"
-          placeholder="选择日期时间"
-          default-time="12:00:00"
+          :change="pickerOptions.onClick"
           size="mini"
-          value-format="yyyy-MM-dd-HH-mm-ss">
+          placeholder="选择日期时间">
       </el-date-picker>
+        {{value}}
     </div>
   </div>
 </template>
@@ -18,36 +18,19 @@
 import Icon from '@/components/Icon.vue';
 
 export default {
-  name: 'Date',
+  name: 'GetDate',
   components: {Icon},
   data() {
     return {
       pickerOptions: {
-        shortcuts: [{
-          text: '今天',
           onClick(picker) {
             picker.$emit('pick', new Date());
           }
-        }, {
-          text: '昨天',
-          onClick(picker) {
-            const date = new Date();
-            date.setTime(date.getTime() - 3600 * 1000 * 24);
-            picker.$emit('pick', date);
-          }
-        }, {
-          text: '一周前',
-          onClick(picker) {
-            const date = new Date();
-            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-            picker.$emit('pick', date);
-          }
-        }]
       },
-      value: '',
-    };
-  }
-};
+      value: '2020-1-1'
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>

@@ -25,10 +25,7 @@ const routes: Array<RouteConfig> = [
     path:'/labels',
     component:Labels
   },
-  {
-    path:'/date',
-    component:TestDate
-  },
+
   {
     path:'*',
     component:NotFound
