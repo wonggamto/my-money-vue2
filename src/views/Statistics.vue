@@ -1,6 +1,5 @@
 <template>
   <Layout>
-<!--    <TopBar/>-->
     statistics
     <Nav/>
   </Layout>
@@ -8,9 +7,10 @@
 
 <script lang="ts">
 import Nav from '@/components/Nav.vue';
+import Layout from '@/components/Layout.vue';
 export default {
   name: 'Statistics',
-  components: {Nav},
+  components: {Nav,Layout},
 };
 </script>
 
