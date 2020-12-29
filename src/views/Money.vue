@@ -1,12 +1,12 @@
 <template>
-  <Layout class-prefix="layout">
-    <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
-    <OutPut :record="record.amount"/>
-    <GetDate @update:value="pick"/>
-    <Notes @update:value="onUpdateNotes"/>
-    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+  <div class="layout">
     <Category :value.sync="record.type"/>
-  </Layout>
+    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+    <OutPut :record="record.amount"/>
+    <Notes @update:value="onUpdateNotes"/>
+    <GetDate @update:value="pick"/>
+    <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
+  </div>
 </template>
 <script lang="ts">
 import Vue from 'vue';
@@ -69,7 +69,7 @@ export default class Money extends Vue {
 <style lang="scss">
 .layout-content {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 </style>
 <style lang="scss" scoped>

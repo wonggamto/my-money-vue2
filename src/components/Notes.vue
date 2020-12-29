@@ -1,5 +1,4 @@
 <template>
-  <div>
     <label class="notes">
         <span class="name">
           <Icon name="note"/>
@@ -8,7 +7,6 @@
              v-model="value"
              placeholder="输入备注">
     </label>
-  </div>
 </template>
 
 <script lang="ts">
@@ -42,7 +40,7 @@ export default class Notes extends Vue {
   }
 
   input {
-    padding: 4px 16px 4px 0;
+    padding: 14px 16px 14px 0;
     flex-grow: 1;
     background: transparent;
     border: none;

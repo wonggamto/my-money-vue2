@@ -3,11 +3,14 @@
     <div class="content" :class="classPrefix && `${classPrefix}-content`">
       <slot/>
     </div>
+    <Nav/>
   </div>
 </template>
 
 <script lang="ts">
+import Nav from '../../money-vue2-2/src/components/Nav.vue';
 export default {
+  components: {Nav},
   props:['classPrefix'],
   name: 'Layout',
 };

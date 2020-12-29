@@ -45,7 +45,7 @@ export default {
   display: flex;
   padding-left: 18px;
   align-items: center;
-
+  padding-bottom: 24px;
   > .timeBlock {
     padding-left: 14px;
   }
