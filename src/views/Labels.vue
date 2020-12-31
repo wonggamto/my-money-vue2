@@ -5,12 +5,16 @@
       <Icon name="logo" class="logo"/>
       <Icon/>
     </div>
-    <ol class="tags">
-      <li v-for="tag in tags " :key="tag.id"><span>{{ tag.name }}</span></li>
-      <li @click="createTag">
+    <div class="tags">
+      <router-link :to="`/labels/edit/${tag.id}`"
+                   v-for="tag in tags " :key="tag.id"
+                    class="tag-link">
+        <span>{{ tag.name }}</span></router-link>
+      <div  @click="createTag"
+                    class="tag-link">
         <Icon name="add" class="add"/>
-      </li>
-    </ol>
+      </div>
+    </div>
   </Layout>
 </template>
 
@@ -68,7 +72,7 @@ export default class Labels extends Vue {
   flex-grow: 1;
   padding-left: 12px;
 
-  > li {
+  > .tag-link {
     display: flex;
     align-items: center;
     justify-content: center;
