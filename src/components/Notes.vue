@@ -1,24 +1,28 @@
 <template>
-    <label class="notes">
+  <label class="notes">
         <span class="name">
-          <Icon name="note"/>
+          <Icon :name="this.iconName"/>
         </span>
-      <input type="text"
-             v-model="value"
-             placeholder="输入备注">
-    </label>
+    <input type="text"
+           v-model="value"
+           :placeholder="this.placeholder">
+  </label>
 </template>
 
 <script lang="ts">
 import Icon from '@/components/Icon.vue';
 import Vue from 'vue';
-import {Component, Watch} from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
+
 @Component({components: {Icon}})
 export default class Notes extends Vue {
   value = '';
+  @Prop({required: true}) iconName!: string;
+  @Prop() placeholder?: string;
+
   @Watch('value')
-  onValueChange(value: string){
-    this.$emit('update:value',value)
+  onValueChange(value: string) {
+    this.$emit('update:value', value);
   }
 }
 </script>

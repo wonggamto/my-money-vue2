@@ -3,7 +3,8 @@
     <Category :value.sync="record.type"/>
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
     <OutPut :record="record.amount"/>
-    <Notes @update:value="onUpdateNotes"/>
+    <Notes @update:value="onUpdateNotes" icon-name="note"
+           placeholder="请输入备注"/>
     <GetDate @update:value="pick"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
   </div>
