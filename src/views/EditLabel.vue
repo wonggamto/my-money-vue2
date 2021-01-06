@@ -5,8 +5,16 @@
       <Icon name="logo" class="logo"/>
       <Icon/>
     </div>
-    <FormItem icon-name="name" placeholder="请输入标签名" field-name="修改标签"/>
+    <div class="formWrapper">
+      <FormItem icon-name="name" placeholder="请输入标签名" field-name="修改标签"/>
+      <div class="removeTag">
+        <button>
+          <Icon name="remove"/>
+        </button>
+      </div>
+    </div>
   </Layout>
+
 </template>
 
 <script lang="ts">
@@ -23,6 +31,7 @@ import FormItem from '@/components/FormItem.vue';
 })
 export default class EditLabel extends Vue {
   @Prop() value!: string;
+
   created() {
     const id = this.$route.params.id;
     tagListModel.fetch();
@@ -54,27 +63,22 @@ export default class EditLabel extends Vue {
   }
 }
 
-.edit {
-  background: #FFF;
-  font-size: 18px;
-  padding-left: 18px;
+.formWrapper {
   display: flex;
-  align-items: center;
-  max-height: 100%;
+  flex-direction: column;
+  justify-content: center;
 
-  > .name {
-    padding-right: 16px;
-  }
-
-  input {
-    padding: 14px 16px 14px 0;
-    flex-grow: 1;
-    background: transparent;
-    border: none;
-  }
-  button{
-    width: 64px;
-    height: 64px;
+  > .removeTag {
+    display: flex;
+    justify-content: center;
+    > button{
+      width: 64px;
+      height: 64px;
+      border-radius: 30%;
+      margin-top: 24px;
+    }
   }
 }
+
+
 </style>

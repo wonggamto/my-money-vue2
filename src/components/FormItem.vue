@@ -1,11 +1,11 @@
 <template>
     <label class="notes">
         <span class="name">
-          <Icon :name="this.iconName"/>
+          <Icon :name="iconName"/>
         </span>
       <input type="text"
              v-model="value"
-             :placeholder="this.placeholder">
+             :placeholder="placeholder">
     </label>
 </template>
 
@@ -22,7 +22,6 @@ export default class FormItem extends Vue {
   @Prop({required: true}) iconName!: string;
   @Prop() placeholder?: string;
 
-  @Watch('value')
   onValueChange(value: string) {
     this.$emit('update:value', value);
   }
