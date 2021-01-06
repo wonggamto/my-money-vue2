@@ -14,7 +14,7 @@ import Vue from 'vue';
 import Layout from '@/components/Layout.vue';
 import NumberPad from '@/components/NumberPad.vue';
 import OutPut from '@/components/OutPut.vue';
-import Notes from '@/components/Notes.vue';
+import FormItem from '@/components/FormItem.vue';
 import Tags from '@/components/Tags.vue';
 import GetDate from '@/components/GetDate.vue';
 import Category from '@/components/Category.vue';
@@ -27,7 +27,7 @@ const tagList = tagListModel.fetch();
 @Component(
     {
       components: {
-        Category, Tags, Notes,
+        Category, Tags, Notes: FormItem,
         OutPut, NumberPad, Layout, GetDate
       }
     })

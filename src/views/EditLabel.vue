@@ -5,7 +5,7 @@
       <Icon name="logo" class="logo"/>
       <Icon/>
     </div>
-    <Notes icon-name="name" placeholder="请输入标签名" field-name="修改标签"/>
+    <FormItem icon-name="name" placeholder="请输入标签名" field-name="修改标签"/>
   </Layout>
 </template>
 
@@ -16,10 +16,10 @@ import Layout from '../../money-vue2-2/src/components/Layout.vue';
 import {tagListModel} from '@/models/tagListModel';
 import Icon from '@/components/Icon.vue';
 import Nav from '@/components/Nav.vue';
-import Notes from '@/components/Notes.vue';
+import FormItem from '@/components/FormItem.vue';
 
 @Component({
-  components: {Notes, Layout, Icon, Nav}
+  components: {FormItem, Layout, Icon, Nav}
 })
 export default class EditLabel extends Vue {
   @Prop() value!: string;

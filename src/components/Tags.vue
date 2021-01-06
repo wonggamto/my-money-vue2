@@ -49,7 +49,7 @@ export default class Tags extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .tags {
-  height: 30%;
+  height: 164px;
   overflow: auto;
   font-size: 14px;
   display: flex;

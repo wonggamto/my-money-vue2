@@ -1,21 +1,23 @@
 <template>
-  <label class="notes">
+    <label class="notes">
         <span class="name">
           <Icon :name="this.iconName"/>
         </span>
-    <input type="text"
-           v-model="value"
-           :placeholder="this.placeholder">
-  </label>
+      <input type="text"
+             v-model="value"
+             :placeholder="this.placeholder">
+    </label>
 </template>
 
 <script lang="ts">
 import Icon from '@/components/Icon.vue';
 import Vue from 'vue';
 import {Component, Prop, Watch} from 'vue-property-decorator';
+import Nav from '@/components/Nav.vue';
+import Layout from '../../money-vue2-2/src/components/Layout.vue';
 
-@Component({components: {Icon}})
-export default class Notes extends Vue {
+@Component({components: {Layout, Nav, Icon}})
+export default class FormItem extends Vue {
   value = '';
   @Prop({required: true}) iconName!: string;
   @Prop() placeholder?: string;
@@ -38,7 +40,6 @@ export default class Notes extends Vue {
   display: flex;
   align-items: center;
   max-height: 100%;
-
   > .name {
     padding-right: 16px;
   }
