@@ -4,7 +4,7 @@
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
     <OutPut :record="record.amount"/>
     <FormItem @update:value="onUpdateNotes" icon-name="note"
-           placeholder="请输入备注"/>
+              placeholder="请输入备注"/>
     <GetDate @update:value="pick"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     {{ record }}
@@ -59,13 +59,12 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    const record2: RecordItem = recordListModel.clone(this.record);
-    this.recordList.push(record2);
+    recordListModel.create(this.record);
   }
 
   @Watch('recordList')
   onRecordListChange() {
-    recordListModel.save(this.recordList);
+    recordListModel.save();
   }
 
 
