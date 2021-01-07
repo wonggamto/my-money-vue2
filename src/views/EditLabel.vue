@@ -6,7 +6,7 @@
       <Icon/>
     </div>
     <div class="formWrapper">
-      <FormItem icon-name="name" placeholder="请输入标签名" field-name="修改标签"/>
+      <FormItem :value = "tag" icon-name="name" placeholder="请输入标签名" field-name="修改标签"/>
       <div class="removeTag">
         <button>
           <Icon name="remove"/>
@@ -31,6 +31,7 @@ import FormItem from '@/components/FormItem.vue';
 })
 export default class EditLabel extends Vue {
   @Prop() value!: string;
+  tag?: { id: string; name: string } = undefined;
 
   created() {
     const id = this.$route.params.id;
@@ -38,7 +39,7 @@ export default class EditLabel extends Vue {
     const tags = tagListModel.data;
     const tag = tags.filter(t => t.id === id)[0];
     if (tag) {
-      console.log(tag);
+      this.tag = tag;
     } else {
       this.$router.replace('/404');
     }
@@ -71,7 +72,8 @@ export default class EditLabel extends Vue {
   > .removeTag {
     display: flex;
     justify-content: center;
-    > button{
+
+    > button {
       width: 64px;
       height: 64px;
       border-radius: 30%;
