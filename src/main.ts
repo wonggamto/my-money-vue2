@@ -5,9 +5,12 @@ import router from './router';
 import store from './store';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import {tagListModel} from '@/models/tagListModel';
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
+
+window.tagList = tagListModel.fetch();
 new Vue({
   router,
   store,

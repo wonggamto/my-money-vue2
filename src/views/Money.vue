@@ -21,10 +21,8 @@ import GetDate from '@/components/GetDate.vue';
 import Category from '@/components/Category.vue';
 import {Component, Watch} from 'vue-property-decorator';
 import {recordListModel} from '@/models/recordListModel';
-import {tagListModel} from '@/models/tagListModel';
 
 const recordList = recordListModel.fetch();
-const tagList = tagListModel.fetch();
 @Component(
     {
       components: {
@@ -34,7 +32,7 @@ const tagList = tagListModel.fetch();
       }
     })
 export default class Money extends Vue {
-  tags = tagList;
+  tags = window.tagList;
   recordList: RecordItem[] = recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0, output: '0'
