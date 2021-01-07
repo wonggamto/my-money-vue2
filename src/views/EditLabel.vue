@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="topBar">
-      <Icon name="back" class="back"/>
+      <Icon name="back" class="back" @click="goBack"/>
       <Icon name="logo" class="logo"/>
       <Icon/>
     </div>
@@ -10,7 +10,7 @@
                 @update:value="updateTag"
                 icon-name="name" placeholder="请输入标签名" field-name="修改标签"/>
       <div class="removeTag">
-        <button>
+        <button @click="removeTag">
           <Icon name="remove"/>
         </button>
       </div>
@@ -51,6 +51,16 @@ export default class EditLabel extends Vue {
     if (this.tag) {
       tagListModel.update(this.tag.id, name);
     }
+  }
+
+  removeTag() {
+    if (this.tag) {
+      tagListModel.remove(this.tag.id);
+    }
+  }
+
+  goBack() {
+    this.$router.back();
   }
 }
 </script>
