@@ -10,7 +10,7 @@
                    v-for="tag in tags " :key="tag.id"
                    class="tag-link">
         <span>{{ tag.name }}</span></router-link>
-      <div @click="createTag"
+      <div @click="create"
            class="tag-link">
         <Icon name="add" class="add"/>
       </div>
@@ -23,7 +23,6 @@ import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import {tagListModel} from '@/models/tagListModel';
 
 
 @Component({
@@ -34,15 +33,10 @@ import {tagListModel} from '@/models/tagListModel';
 export default class Labels extends Vue {
   tags = window.tagList;
 
-  createTag() {
+  create() {
     const name = window.prompt('请输入标签名');
     if (name) {
-      const message = tagListModel.create(name);
-      if (message === 'duplicated') {
-        window.alert('标签名重复，请重新输入');
-      } else if (message === 'success') {
-        window.alert('标签添加成功');
-      }
+      window.createTag(name);
     }
   }
 }
