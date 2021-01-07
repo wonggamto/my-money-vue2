@@ -7,10 +7,10 @@
     </div>
     <div class="formWrapper">
       <FormItem :value="tag.name"
-                @update:value="updateTag"
+                @update:value="update"
                 icon-name="name" placeholder="请输入标签名" field-name="修改标签"/>
       <div class="removeTag">
-        <button @click="removeTag">
+        <button @click="remove">
           <Icon name="remove"/>
         </button>
       </div>
@@ -33,27 +33,22 @@ import FormItem from '@/components/FormItem.vue';
 })
 export default class EditLabel extends Vue {
   @Prop() value!: string;
-  tag?: { id: string; name: string } = undefined;
+  tag?: Tag = undefined;
 
   created() {
-    const id = this.$route.params.id;
-    tagListModel.fetch();
-    const tags = tagListModel.data;
-    const tag = tags.filter(t => t.id === id)[0];
-    if (tag) {
-      this.tag = tag;
-    } else {
+    this.tag = window.findTag(this.$route.params.id);
+    if (!this.tag) {
       this.$router.replace('/404');
     }
   }
 
-  updateTag(name: string) {
+  update(name: string) {
     if (this.tag) {
-      tagListModel.update(this.tag.id, name);
+      window.updateTag(this.tag.id, name);
     }
   }
 
-  removeTag() {
+  remove() {
     if (this.tag) {
       if (tagListModel.remove(this.tag.id)) {
         this.$router.back();
