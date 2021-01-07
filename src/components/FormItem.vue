@@ -13,7 +13,7 @@
 <script lang="ts">
 import Icon from '@/components/Icon.vue';
 import Vue from 'vue';
-import {Component, Prop, Watch} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 import Nav from '@/components/Nav.vue';
 
 @Component({components: {Nav, Icon}})
@@ -22,7 +22,6 @@ export default class FormItem extends Vue {
   @Prop({required: true}) iconName!: string;
   @Prop() placeholder?: string;
 
-  @Watch('value')
   onValueChange(value: string) {
     this.$emit('update:value', value);
   }
