@@ -6,7 +6,9 @@
       <Icon/>
     </div>
     <div class="formWrapper">
-      <FormItem :value="tag.name" icon-name="name" placeholder="请输入标签名" field-name="修改标签"/>
+      <FormItem :value="tag.name"
+                @update:value="updateTag"
+                icon-name="name" placeholder="请输入标签名" field-name="修改标签"/>
       <div class="removeTag">
         <button>
           <Icon name="remove"/>
@@ -42,6 +44,12 @@ export default class EditLabel extends Vue {
       this.tag = tag;
     } else {
       this.$router.replace('/404');
+    }
+  }
+
+  updateTag(name: string) {
+    if (this.tag) {
+      tagListModel.update(this.tag.id, name);
     }
   }
 }
