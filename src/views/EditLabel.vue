@@ -23,10 +23,11 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import Layout from '../../money-vue2-2/src/components/Layout.vue';
-import {tagListModel} from '@/models/tagListModel';
 import Icon from '@/components/Icon.vue';
 import Nav from '@/components/Nav.vue';
 import FormItem from '@/components/FormItem.vue';
+import {store} from '@/store/index2';
+import {tagStore} from '@/store/tagStore';
 
 @Component({
   components: {FormItem, Layout, Icon, Nav}
@@ -36,7 +37,7 @@ export default class EditLabel extends Vue {
   tag?: Tag = undefined;
 
   created() {
-    this.tag = window.findTag(this.$route.params.id);
+    this.tag = store.findTag(this.$route.params.id);
     if (!this.tag) {
       this.$router.replace('/404');
     }
@@ -44,13 +45,13 @@ export default class EditLabel extends Vue {
 
   update(name: string) {
     if (this.tag) {
-      window.updateTag(this.tag.id, name);
+      store.updateTag(this.tag.id, name);
     }
   }
 
   remove() {
     if (this.tag) {
-      if (tagListModel.remove(this.tag.id)) {
+      if (tagStore.removeTag(this.tag.id)) {
         this.$router.back();
       } else {
         window.alert('删除失败');
