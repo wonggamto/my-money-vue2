@@ -1,13 +1,14 @@
 <template>
   <div class="layout">
     <Category :value.sync="record.type"/>
-    <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
+    <Tags/>
     <OutPut :record="record.amount"/>
     <FormItem @update:value="onUpdateNotes" icon-name="note"
               placeholder="请输入备注"/>
     <GetDate @update:value="pick"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
-    {{ record }}
+    {{count}}
+    <button @click="add">+1</button>
   </div>
 </template>
 <script lang="ts">
@@ -28,23 +29,25 @@ import {store} from '@/store/index2';
         FormItem,
         Category, Tags,
         OutPut, NumberPad, Layout, GetDate
+      },
+      computed:{
+        count(){
+          return store.count;
+        }
       }
     })
 export default class Money extends Vue {
-  tags = store.tagList;
   recordList = store.recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0, output: '0'
   };
-
-  onUpdateTags(value: string[]) {
-    this.record.tags = value;
+  store = store;
+  add(){
+    store.addCount();
   }
-
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }
-
 
   onGetNumber(value: string) {
     this.record.amount = parseFloat(value);

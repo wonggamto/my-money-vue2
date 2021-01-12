@@ -1,9 +1,9 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag"
+      <li v-for="tag in tagList" :key="tag.id"
           :class="{selected: selectedTags.indexOf(tag)>=0}"
-          @click="toggle(tag)">{{ tag }}
+          @click="toggle(tag)">{{ tag.name }}
       </li>
       <li class="new" @click="createTag">
         <Icon name="add"/>
@@ -15,11 +15,12 @@
 <script lang="ts">
 import Icon from '@/components/Icon.vue';
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
+import {store} from '@/store/index2';
 
 @Component({components: {Icon}})
 export default class Tags extends Vue {
-  @Prop() readonly dataSource: string[] | undefined;
+  tagList = store.fetchTags();
   selectedTags: string[] = [];
 
   toggle(tag: string) {
@@ -29,17 +30,13 @@ export default class Tags extends Vue {
     } else {
       this.selectedTags.push(tag);
     }
-    this.$emit('update:value',this.selectedTags)
+    this.$emit('update:value', this.selectedTags);
   }
 
   createTag() {
     const tagName = window.prompt('请输入标签名');
-    if (tagName === '') {
-      window.alert('标签名不能为空！');
-    } else if (this.dataSource) {
-        this.$emit('update:dataSource',
-            [...this.dataSource, tagName]);
-      }
+    if (!tagName) {return window.alert('标签名不能为空！');}
+    store.createTag(tagName);
   }
 }
 </script>

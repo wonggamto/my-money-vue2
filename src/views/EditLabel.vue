@@ -26,8 +26,8 @@ import Layout from '../../money-vue2-2/src/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
 import Nav from '@/components/Nav.vue';
 import FormItem from '@/components/FormItem.vue';
-import {store} from '@/store/index2';
 import {tagStore} from '@/store/tagStore';
+import {store} from '@/store/index2';
 
 @Component({
   components: {FormItem, Layout, Icon, Nav}
