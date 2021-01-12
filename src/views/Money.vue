@@ -19,10 +19,8 @@ import FormItem from '@/components/FormItem.vue';
 import Tags from '@/components/Tags.vue';
 import GetDate from '@/components/GetDate.vue';
 import Category from '@/components/Category.vue';
-import {Component, Watch} from 'vue-property-decorator';
-import {recordListModel} from '@/models/recordListModel';
+import {Component} from 'vue-property-decorator';
 
-const recordList = recordListModel.fetch();
 @Component(
     {
       components: {
@@ -33,7 +31,7 @@ const recordList = recordListModel.fetch();
     })
 export default class Money extends Vue {
   tags = window.tagList;
-  recordList: RecordItem[] = recordList;
+  recordList = window.recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0, output: '0'
   };
@@ -53,16 +51,11 @@ export default class Money extends Vue {
 
   pick(value: Date) {
     this.record.createAt = value;
-    console.log(this.record.createAt);
+    // console.log(this.record.createAt);
   }
 
   saveRecord() {
-    recordListModel.create(this.record);
-  }
-
-  @Watch('recordList')
-  onRecordListChange() {
-    recordListModel.save();
+    window.createRecord(this.record);
   }
 
 
