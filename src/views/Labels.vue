@@ -23,7 +23,6 @@ import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import {store} from '@/store/index2';
 
 
 @Component({
@@ -32,12 +31,12 @@ import {store} from '@/store/index2';
   }
 })
 export default class Labels extends Vue {
-  tags = store.tagList;
+  // tags = store2.tagList;
 
   create() {
     const name = window.prompt('请输入标签名');
     if (name) {
-      store.createTag(name);
+      // store2.createTag(name);
     }
   }
 }

@@ -16,11 +16,17 @@
 import Icon from '@/components/Icon.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import {store} from '@/store/index2';
 
-@Component({components: {Icon}})
+@Component({
+  components: {Icon},
+  computed: {
+    tagList(){
+      //TODO
+      return []
+    }
+  }
+},)
 export default class Tags extends Vue {
-  tagList = store.fetchTags();
   selectedTags: string[] = [];
 
   toggle(tag: string) {
@@ -36,7 +42,8 @@ export default class Tags extends Vue {
   createTag() {
     const tagName = window.prompt('请输入标签名');
     if (!tagName) {return window.alert('标签名不能为空！');}
-    store.createTag(tagName);
+    //TODO
+    // store2.createTag(tagName);
   }
 }
 </script>

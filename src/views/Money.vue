@@ -7,8 +7,6 @@
               placeholder="请输入备注"/>
     <GetDate @update:value="pick"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
-    {{count}}
-    <button @click="add">+1</button>
   </div>
 </template>
 <script lang="ts">
@@ -21,7 +19,6 @@ import Tags from '@/components/Tags.vue';
 import GetDate from '@/components/GetDate.vue';
 import Category from '@/components/Category.vue';
 import {Component} from 'vue-property-decorator';
-import {store} from '@/store/index2';
 
 @Component(
     {
@@ -30,21 +27,19 @@ import {store} from '@/store/index2';
         Category, Tags,
         OutPut, NumberPad, Layout, GetDate
       },
-      computed:{
-        count(){
-          return store.count;
-        }
+      computed: {
+        recordList() {return this.$store.state.recordList;}
       }
     })
 export default class Money extends Vue {
-  recordList = store.recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0, output: '0'
   };
-  store = store;
-  add(){
-    store.addCount();
+
+  created() {
+    this.$store.commit('fetchRecords');
   }
+
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }
@@ -59,7 +54,7 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    store.createRecord(this.record);
+    this.$store.commit('createRecord', this.record);
   }
 
 

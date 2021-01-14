@@ -1,21 +1,26 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import clone from '@/libs/clone';
 
 Vue.use(Vuex);
-
 const store = new Vuex.Store({
-  // state: {
-  //   count: 0
-  // },
-  // mutations: {
-  //   increment(state) {
-  //     state.count += 1;
-  //   }
-  // },
-  // actions: {},
-  // modules: {}
+  state: {//data
+    recordList: [] as RecordItem[]
+  },
+  mutations: {//methods
+    fetchRecords(state) {
+      state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
+    },
+    createRecord(state, record: RecordItem) {
+      const record2: RecordItem = clone(record);
+      state.recordList.push(record2);
+      store.commit('saveRecord')
+      console.log(state.recordList);
+    },
+    saveRecord(state) {
+      window.localStorage.setItem('recordList',
+        JSON.stringify(state.recordList));
+    },
+  }
 });
-// console.log(store.state.count);
-// store.commit('increment');
-// console.log(store.state.count);
 export default store;

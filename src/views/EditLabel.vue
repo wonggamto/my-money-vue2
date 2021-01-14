@@ -27,7 +27,6 @@ import Icon from '@/components/Icon.vue';
 import Nav from '@/components/Nav.vue';
 import FormItem from '@/components/FormItem.vue';
 import {tagStore} from '@/store/tagStore';
-import {store} from '@/store/index2';
 
 @Component({
   components: {FormItem, Layout, Icon, Nav}
@@ -37,7 +36,7 @@ export default class EditLabel extends Vue {
   tag?: Tag = undefined;
 
   created() {
-    this.tag = store.findTag(this.$route.params.id);
+    // this.tag = store2.findTag(this.$route.params.id);
     if (!this.tag) {
       this.$router.replace('/404');
     }
@@ -45,7 +44,7 @@ export default class EditLabel extends Vue {
 
   update(name: string) {
     if (this.tag) {
-      store.updateTag(this.tag.id, name);
+      // store2.updateTag(this.tag.id, name);
     }
   }
 
