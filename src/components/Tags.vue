@@ -5,7 +5,7 @@
           :class="{selected: selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">{{ tag.name }}
       </li>
-      <li class="new" @click="createTag">
+      <li class="new" @click="create">
         <Icon name="add"/>
       </li>
     </ul>
@@ -20,14 +20,17 @@ import {Component} from 'vue-property-decorator';
 @Component({
   components: {Icon},
   computed: {
-    tagList(){
-      //TODO
-      return []
+    tagList() {
+      return this.$store.state.tagList;
     }
   }
 },)
 export default class Tags extends Vue {
   selectedTags: string[] = [];
+
+  created() {
+    this.$store.commit('fetchTags');
+  }
 
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
@@ -39,11 +42,10 @@ export default class Tags extends Vue {
     this.$emit('update:value', this.selectedTags);
   }
 
-  createTag() {
+  create() {
     const tagName = window.prompt('请输入标签名');
     if (!tagName) {return window.alert('标签名不能为空！');}
-    //TODO
-    // store2.createTag(tagName);
+    this.$store.commit('createTag', tagName);
   }
 }
 </script>

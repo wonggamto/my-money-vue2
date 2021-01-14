@@ -10,7 +10,7 @@
                    v-for="tag in tags " :key="tag.id"
                    class="tag-link">
         <span>{{ tag.name }}</span></router-link>
-      <div @click="create"
+      <div @click="createTag"
            class="tag-link">
         <Icon name="add" class="add"/>
       </div>
@@ -28,16 +28,22 @@ import {Component} from 'vue-property-decorator';
 @Component({
   components: {
     Layout, Icon
+  },
+  computed: {
+    tags() {
+      return this.$store.state.tagList;
+    }
   }
 })
 export default class Labels extends Vue {
-  // tags = store2.tagList;
+  created() {
+    this.$store.commit('fetchTags');
+  }
 
-  create() {
-    const name = window.prompt('请输入标签名');
-    if (name) {
-      // store2.createTag(name);
-    }
+  createTag() {
+    const tagName = window.prompt('请输入标签名');
+    if (!tagName) {return window.alert('标签名不能为空！');}
+    this.$store.commit('createTag', tagName);
   }
 }
 </script>

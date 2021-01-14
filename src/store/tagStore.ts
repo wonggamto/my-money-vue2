@@ -11,18 +11,18 @@ const tagStore = {
   findTag(id: string) {
     return this.tagList.filter(t => t.id === id)[0];
   },
-  createTag(name: string) {
-    const names = this.tagList.map(item => item.name);
-    if (names.indexOf(name) >= 0) {
-      window.alert('标签名重复，请重新输入');
-      return 'duplicated';
-    }
-    const id = createId().toString();
-    this.tagList.push({id: id, name: name});
-    this.saveTags();
-    window.alert('标签添加成功');
-    return 'success';
-  },
+  // createTag(name: string) {
+  //   const names = this.tagList.map(item => item.name);
+  //   if (names.indexOf(name) >= 0) {
+  //     window.alert('标签名重复，请重新输入');
+  //     return 'duplicated';
+  //   }
+  //   const id = createId().toString();
+  //   this.tagList.push({id: id, name: name});
+  //   this.saveTags();
+  //   window.alert('标签添加成功');
+  //   return 'success';
+  // },
   removeTag(id: string) {
     let index = -1;
     for (let i = 0; i < this.tagList.length; i++) {
