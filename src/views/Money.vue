@@ -27,15 +27,14 @@ import {Component} from 'vue-property-decorator';
         Category, Tags,
         OutPut, NumberPad, Layout, GetDate
       },
-      computed: {
-        recordList() {return this.$store.state.recordList;}
-      }
     })
 export default class Money extends Vue {
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0, output: '0'
   };
-
+  get recordList(){
+    return this.$store.state.recordList;
+  }
   created() {
     this.$store.commit('fetchRecords');
   }
