@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 import Layout from '../../money-vue2-2/src/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
 import Nav from '@/components/Nav.vue';
@@ -29,14 +29,17 @@ import FormItem from '@/components/FormItem.vue';
 import {tagStore} from '@/store/tagStore';
 
 @Component({
-  components: {FormItem, Layout, Icon, Nav}
+  components: {FormItem, Layout, Icon, Nav},
 })
 export default class EditLabel extends Vue {
-  @Prop() value!: string;
-  tag?: Tag = undefined;
+
+  get tag() {
+    return this.$store.state.currentTag;
+  }
 
   created() {
-    // this.tag = store2.findTag(this.$route.params.id);
+    const id = this.$route.params.id;
+    this.$store.commit('setCurrentTag', id);
     if (!this.tag) {
       this.$router.replace('/404');
     }
