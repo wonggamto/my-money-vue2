@@ -5,7 +5,7 @@
           :class="{selected: selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">{{ tag.name }}
       </li>
-      <li class="new" @click="create">
+      <li class="new" @click="createTag">
         <Icon name="add"/>
       </li>
     </ul>
@@ -14,8 +14,9 @@
 
 <script lang="ts">
 import Icon from '@/components/Icon.vue';
-import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
+import {mixins} from 'vue-class-component';
+import {TagHelper} from '@/mixins/TagHelper';
 
 @Component({
   components: {Icon},
@@ -25,7 +26,7 @@ import {Component} from 'vue-property-decorator';
     }
   }
 },)
-export default class Tags extends Vue {
+export default class Tags extends mixins(TagHelper){
   selectedTags: string[] = [];
 
   created() {
@@ -42,11 +43,6 @@ export default class Tags extends Vue {
     this.$emit('update:value', this.selectedTags);
   }
 
-  create() {
-    const tagName = window.prompt('请输入标签名');
-    if (!tagName) {return window.alert('标签名不能为空！');}
-    this.$store.commit('createTag', tagName);
-  }
 }
 </script>
 

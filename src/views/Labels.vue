@@ -21,9 +21,9 @@
 <script lang="ts">
 import Layout from '@/components/Layout.vue';
 import Icon from '@/components/Icon.vue';
-import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-
+import {mixins} from 'vue-class-component';
+import {TagHelper} from '@/mixins/TagHelper';
 
 @Component({
   components: {
@@ -35,16 +35,12 @@ import {Component} from 'vue-property-decorator';
     }
   }
 })
-export default class Labels extends Vue {
+export default class Labels extends mixins(TagHelper) {
   created() {
     this.$store.commit('fetchTags');
   }
 
-  createTag() {
-    const tagName = window.prompt('请输入标签名');
-    if (!tagName) {return window.alert('标签名不能为空！');}
-    this.$store.commit('createTag', tagName);
-  }
+
 }
 </script>
 
