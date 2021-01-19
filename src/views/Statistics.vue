@@ -3,7 +3,7 @@
     <Category :value.sync="type" :data-source="categoryList"/>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
     <div>
-      type:{{type}}
+      type:{{ type }}
       <hr>
       interval:{{ interval }}
     </div>
@@ -16,6 +16,8 @@ import Category from '@/components/Category.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
+import {intervalList} from '@/constants/intervalList';
+import {categoryList} from '@/constants/categoryList';
 
 @Component({
   components: {
@@ -24,14 +26,10 @@ import Tabs from '@/components/Tabs.vue';
 })
 export default class Statistics extends Vue {
   type = '-';
-  categoryList = [
-    {text: '支出', value: '-'},
-    {text: '收入', value: '+'}
-  ];
+
   interval = 'day';
-  intervalList = [{text: '天', value: 'day'},
-    {text: '周', value: 'week'},
-    {text: '月', value: 'month'}];
+  categoryList = categoryList;
+  intervalList = intervalList;
 }
 </script>
 

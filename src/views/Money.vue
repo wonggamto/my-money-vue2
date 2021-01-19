@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <Category :value.sync="record.type" icon-name="back"/>
+    <Category :data-source="categoryList" :value.sync="record.type" icon-name="back"/>
     <Tags/>
     <OutPut :record="record.amount"/>
     <FormItem @update:value="onUpdateNotes" icon-name="note"
@@ -19,6 +19,7 @@ import Tags from '@/components/Tags.vue';
 import GetDate from '@/components/GetDate.vue';
 import Category from '@/components/Category.vue';
 import {Component} from 'vue-property-decorator';
+import {categoryList} from '@/constants/categoryList';
 
 @Component(
     {
@@ -32,9 +33,12 @@ export default class Money extends Vue {
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0, output: '0'
   };
-  get recordList(){
+  categoryList = categoryList;
+
+  get recordList() {
     return this.$store.state.recordList;
   }
+
   created() {
     this.$store.commit('fetchRecords');
   }
