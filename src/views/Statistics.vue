@@ -34,5 +34,7 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
+::v-deep .interval-tabs-item{
+  //border:1px solid red;
+}
 </style>

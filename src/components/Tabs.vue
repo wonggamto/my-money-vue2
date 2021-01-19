@@ -1,5 +1,5 @@
 <template>
-  <ul class="types">
+  <ul class="types" :class="{[classPrefix+'-tab']:classPrefix}">
     <li v-for="item in dataSource"
         @click="select(item)"
         :class="liClass(item)"
@@ -19,12 +19,13 @@ export default class Tabs extends Vue {
   @Prop({required: true, type: Array})
   dataSource!: DataSourceItem[];
 
-  liClass(item: DataSourceItem){
+  liClass(item: DataSourceItem) {
     return {
       [this.classPrefix + '-tabs-item']: this.classPrefix,
       selected: item.value === this.value
     };
   }
+
   select(item: DataSourceItem) {
     this.$emit('update:value', item.value);
   }
