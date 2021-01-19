@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <Category :value.sync="record.type"/>
+    <Category :value.sync="record.type" icon-name="back"/>
     <Tags/>
     <OutPut :record="record.amount"/>
     <FormItem @update:value="onUpdateNotes" icon-name="note"

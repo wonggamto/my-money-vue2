@@ -1,15 +1,18 @@
 <template>
   <div class="category">
     <router-link to="/statistics">
-      <Icon name="back"/>
+      <Icon :name="iconName"/>
     </router-link>
     <ul class="types">
-      <li :class="value === '-' && 'selected'"
+      <li :class="{[classPrefix+'-item']:classPrefix,
+                          selected:value === '-',}"
           @click="selectType('-')">支出
       </li>
-      <li :class="value === '+' && 'selected'"
+      <li :class="{[classPrefix+'-item']:classPrefix,
+                          selected:value === '+',}"
           @click="selectType('+')">收入
       </li>
+
     </ul>
     <Icon name=""/>
   </div>
@@ -20,15 +23,20 @@ import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import Icon from '@/components/Icon.vue';
 
-
-@Component({components:{Icon}})
+type dataSourceItem = { text: string; value: string }
+@Component({components: {Icon}})
 export default class Category extends Vue {
   @Prop() readonly value!: string;
+  @Prop(String) readonly iconName?: string;
+  @Prop(String) classPrefix?: string;
+  @Prop({type: Array})
+  readonly dataSource!: dataSourceItem[];
+
   selectType(type: string) {
     if (type !== '-' && type !== '+') {
       throw new Error('type is unknown');
     }
-    this.$emit('update:value',type)
+    this.$emit('update:value', type);
   }
 
 }
@@ -66,6 +74,10 @@ export default class Category extends Vue {
         background: #FFF;
         border-radius: 16px;
         color: black;
+
+        ::after {
+          display: none;
+        }
       }
     }
   }
