@@ -5,11 +5,7 @@ import createId from '@/libs/createId';
 import router from '@/router';
 
 Vue.use(Vuex);
-type RootState = {
-  recordList: RecordItem[];
-  tagList: Tag[];
-  currentTag?: Tag;
-}
+
 const store = new Vuex.Store({
   state: {//data
     recordList: [] as RecordItem[],

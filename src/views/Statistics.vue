@@ -2,11 +2,16 @@
   <Layout>
     <Category :value.sync="type" :data-source="categoryList"/>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
-    <div>
-      type:{{ type }}
-      <hr>
-      interval:{{ interval }}
-    </div>
+      <ol>
+        <li class="record" v-for="(group,index) in result" :key="index">
+          <h3 class="title">{{group.title}}</h3>
+          <ol>
+            <li v-for="item in group.items" :key="item.id">
+              {{ item.amount }} {{ item.createAt }}
+            </li>
+          </ol>
+        </li>
+      </ol>
   </Layout>
 </template>
 
@@ -26,15 +31,32 @@ import {categoryList} from '@/constants/categoryList';
 })
 export default class Statistics extends Vue {
   type = '-';
-
   interval = 'day';
   categoryList = categoryList;
   intervalList = intervalList;
+
+  get recordList() {
+    return (this.$store.state as RootState).recordList;
+  }
+
+  get result() {
+    const {recordList} = this;
+    type HashTableValue = { title: string; items: RecordItem[] }
+    const hashTable: { [key: string]: HashTableValue } = {};
+    for (let i = 0; i < recordList.length; i++) {
+      const [date, time] = recordList[i].createAt!.split('T');
+      hashTable[date] = hashTable[date] || {title: date, items: []};
+      hashTable[date].items.push(recordList[i]);
+    }
+    return hashTable;
+  }
+
+  beforeCreate() {
+    this.$store.commit('fetchRecords');
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-::v-deep .interval-tabs-item{
-  //border:1px solid red;
-}
+
 </style>

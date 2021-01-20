@@ -23,14 +23,12 @@ import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import Icon from '@/components/Icon.vue';
 
-type dataSourceItem = { text: string; value: string }
 @Component({components: {Icon}})
 export default class Category extends Vue {
   @Prop() readonly value!: string;
   @Prop(String) readonly iconName?: string;
   @Prop(String) classPrefix?: string;
-  @Prop({type: Array})
-  readonly dataSource!: dataSourceItem[];
+
 
   selectType(type: string) {
     if (type !== '-' && type !== '+') {

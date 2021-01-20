@@ -51,7 +51,7 @@ export default class Money extends Vue {
     this.record.amount = parseFloat(value);
   }
 
-  pick(value: Date) {
+  pick(value: string) {
     this.record.createAt = value;
     // console.log(this.record.createAt);
   }
