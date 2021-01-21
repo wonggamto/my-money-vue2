@@ -3,7 +3,7 @@
     <Category :value.sync="type" :data-source="categoryList"/>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
     <ol>
-      <li v-for="(group,index) in result" :key="index">
+      <li v-for="(group,index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }}</h3>
         <ol>
           <li class="record" v-for="item in group.items" :key="item.id">
@@ -63,12 +63,22 @@ export default class Statistics extends Vue {
     return (this.$store.state as RootState).recordList;
   }
 
-  get result() {
+  get groupedList() {
     const {recordList} = this;
+    if (recordList.length === 0) {return [];}
     type HashTableValue = { title: string; items: RecordItem[] }
-    // const hashTable: { title: string; item: RecordItem[] }[];
     const newList = clone(recordList).sort((a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf());
-    return [];
+    const result = [{title: dayjs(newList[0].createAt).format('YYYY-MM-DD'), items: [newList[0]]}];
+    for (let i = 1; i < newList.length; i++) {
+      const current = newList[i];
+      const last = result[result.length - 1];
+      if (dayjs(last.title).isSame(dayjs(current.createAt), 'day')) {
+        last.items.push(current);
+      } else {
+        result.push({title: dayjs(current.createAt).format('YYYY-MM-DD'), items: [current]});
+      }
+    }
+    return result;
   }
 
   beforeCreate() {
