@@ -7,8 +7,6 @@
           type="datetime"
           @change="onClick"
           size="mini"
-          format="yyyy-MM-dd HH:mm:ss"
-          value-format="yyyy-MM-dd HH:mm:ss"
           placeholder="选择日期时间">
       </el-date-picker>
     </div>

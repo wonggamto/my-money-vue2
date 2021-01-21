@@ -2,16 +2,18 @@
   <Layout>
     <Category :value.sync="type" :data-source="categoryList"/>
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
-      <ol>
-        <li class="record" v-for="(group,index) in result" :key="index">
-          <h3 class="title">{{group.title}}</h3>
-          <ol>
-            <li v-for="item in group.items" :key="item.id">
-              {{ item.amount }} {{ item.createAt }}
-            </li>
-          </ol>
-        </li>
-      </ol>
+    <ol>
+      <li v-for="(group,index) in result" :key="index">
+        <h3 class="title">{{ group.title }}</h3>
+        <ol>
+          <li class="record" v-for="item in group.items" :key="item.id">
+            <span>{{ tagString(item.tags) }} </span>
+            <span class="notes" >{{ item.notes }}</span>
+            <span>¥{{ item.amount }}</span>
+          </li>
+        </ol>
+      </li>
+    </ol>
   </Layout>
 </template>
 
@@ -34,6 +36,10 @@ export default class Statistics extends Vue {
   interval = 'day';
   categoryList = categoryList;
   intervalList = intervalList;
+
+  tagString(tags: Tag[]) {
+    return tags.length === 0 ? '无' : tags.join(',');
+  }
 
   get recordList() {
     return (this.$store.state as RootState).recordList;
@@ -58,5 +64,27 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
+%item {
+  padding: 8px 16px;
+  line-height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  overflow:auto;
+}
+
+.title {
+  @extend %item;
+}
+
+.record {
+  @extend %item;
+  background: white;
+}
+.notes{
+  margin-left: 16px;
+  margin-right: auto;
+  color:#999;
+}
 
 </style>
