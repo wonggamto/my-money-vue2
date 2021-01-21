@@ -4,11 +4,11 @@
     <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
     <ol>
       <li v-for="(group,index) in result" :key="index">
-        <h3 class="title">{{ group.title }}</h3>
+        <h3 class="title">{{ beautify(group.title) }}</h3>
         <ol>
           <li class="record" v-for="item in group.items" :key="item.id">
             <span>{{ tagString(item.tags) }} </span>
-            <span class="notes" >{{ item.notes }}</span>
+            <span class="notes">{{ item.notes }}</span>
             <span>¥{{ item.amount }}</span>
           </li>
         </ol>
@@ -25,6 +25,7 @@ import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import {intervalList} from '@/constants/intervalList';
 import {categoryList} from '@/constants/categoryList';
+import dayjs from 'dayjs';
 
 @Component({
   components: {
@@ -39,6 +40,22 @@ export default class Statistics extends Vue {
 
   tagString(tags: Tag[]) {
     return tags.length === 0 ? '无' : tags.join(',');
+  }
+
+  beautify(string: string) {
+    const day = dayjs(string);
+    const now = dayjs();
+    if (day.isSame(now, 'day')) {
+      return '今天';
+    } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
+      return '昨天';
+    } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
+      return '前天';
+    } else if (day.isSame(now, 'year')) {
+      return day.format('MM月DD日');
+    } else {
+      return day.format('YYYY年MM月DD日');
+    }
   }
 
   get recordList() {
@@ -70,7 +87,7 @@ export default class Statistics extends Vue {
   display: flex;
   justify-content: space-between;
   align-content: center;
-  overflow:auto;
+  overflow: auto;
 }
 
 .title {
@@ -81,10 +98,11 @@ export default class Statistics extends Vue {
   @extend %item;
   background: white;
 }
-.notes{
+
+.notes {
   margin-left: 16px;
   margin-right: auto;
-  color:#999;
+  color: #999;
 }
 
 </style>
