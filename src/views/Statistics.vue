@@ -1,7 +1,6 @@
 <template>
   <Layout>
     <Category :value.sync="type" :data-source="categoryList"/>
-    <Tabs class-prefix="interval" :data-source="intervalList" :value.sync="interval"/>
     <ol>
       <li v-for="(group,index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }}</h3>
@@ -22,7 +21,6 @@ import Layout from '@/components/Layout.vue';
 import Category from '@/components/Category.vue';
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import Tabs from '@/components/Tabs.vue';
 import {intervalList} from '@/constants/intervalList';
 import {categoryList} from '@/constants/categoryList';
 import dayjs from 'dayjs';
@@ -30,7 +28,7 @@ import clone from '@/libs/clone';
 
 @Component({
   components: {
-    Layout, Category, Tabs
+    Layout, Category,
   }
 })
 export default class Statistics extends Vue {
