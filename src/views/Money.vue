@@ -53,7 +53,6 @@ export default class Money extends Vue {
 
   pick(value: string) {
     this.record.createAt = value;
-    // console.log(this.record.createAt);
   }
 
   saveRecord() {
