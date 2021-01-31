@@ -15,7 +15,10 @@ body{
   font-family: $font-hei;
   background: #F8FAFB;
 }
-
+#app{
+  max-width: 500px;
+  margin: 0 auto;
+}
 </style>
 <script>
 export default {
