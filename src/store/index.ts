@@ -9,6 +9,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {//data
     recordList: [] as RecordItem[],
+    createRecordError: null,
     tagList: [] as Tag[],
     currentTag: undefined
   } as RootState,
@@ -54,21 +55,27 @@ const store = new Vuex.Store({
       const id = createId().toString();
       state.tagList.push({id: id, name: name});
       store.commit('saveTags');
-      window.alert('标签添加成功');
     },
     saveTags(state) {
       window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
     },
     fetchTags(state) {
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
+      if (!state.tagList || state.tagList.length === 0) {
+        store.commit('createTag', '衣');
+        store.commit('createTag', '食');
+        store.commit('createTag', '住');
+        store.commit('createTag', '行');
+      }
     },
     fetchRecords(state) {
       state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
     },
     createRecord(state, record: RecordItem) {
-      const record2: RecordItem = clone(record);
+      const record2 = clone(record);
       state.recordList.push(record2);
       store.commit('saveRecord');
+
     },
     saveRecord(state) {
       window.localStorage.setItem('recordList',

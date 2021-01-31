@@ -1,10 +1,10 @@
 <template>
   <div class="layout">
     <Category :data-source="categoryList" :value.sync="record.type" icon-name="back"/>
-    <Tags/>
+    <Tags @update:value="record.tags = $event" />
     <OutPut :record="record.amount"/>
-    <FormItem @update:value="onUpdateNotes" icon-name="note"
-              placeholder="请输入备注"/>
+    <FormItem  icon-name="note"
+              placeholder="请输入备注" :value.sync="record.notes"/>
     <GetDate @update:value="pick"/>
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
   </div>
@@ -56,16 +56,24 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
+    if (!this.record.tags || this.record.tags.length === 0) {
+      return window.alert('请至少选择一个标签');
+    }
     this.$store.commit('createRecord', this.record);
+    if (this.$store.state.createRecordError === null) {
+      window.alert('保存成功');
+      this.record.notes = '';
+    }
   }
 
 
 }
 </script>
-<style lang="scss">
-.layout-content {
+<style lang="scss" scoped>
+.layout {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 </style>
 <style lang="scss" scoped>

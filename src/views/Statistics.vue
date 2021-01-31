@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <Category :value.sync="type" :data-source="categoryList"/>
-    <ol>
+    <ol v-if="groupedList.length>0">
       <li v-for="(group,index) in groupedList" :key="index">
         <h3 class="title">{{ beautify(group.title) }} <span>¥{{ group.total }}</span></h3>
         <ol>
@@ -12,8 +12,10 @@
           </li>
         </ol>
       </li>
-
     </ol>
+    <div v-else class="noResult">
+      目前没有相关记录
+    </div>
   </Layout>
 </template>
 
@@ -39,7 +41,7 @@ export default class Statistics extends Vue {
   intervalList = intervalList;
 
   tagString(tags: Tag[]) {
-    return tags.length === 0 ? '无' : tags.join(',');
+    return tags.length === 0 ? '无' : tags.map(t => t.name).join('，');
   }
 
   beautify(string: string) {
@@ -94,6 +96,10 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.noResult{
+  padding: 16px;
+  text-align: center;
+}
 %item {
   padding: 8px 16px;
   line-height: 24px;
