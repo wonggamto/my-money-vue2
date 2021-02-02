@@ -54,13 +54,13 @@ export default class Tags extends mixins(TagHelper){
   font-size: 14px;
   display: flex;
   flex-wrap: wrap;
+  flex-grow: 1;
 
   > .current {
     display: flex;
     margin: 6px 0;
     flex-wrap: wrap;
     overflow: auto;
-    flex-grow: 1;
     padding-left: 12px;
 
     > li {
