@@ -16,6 +16,7 @@
     <div v-else class="noResult">
       目前没有相关记录
     </div>
+    <Echarts :opthons="x"/>
   </Layout>
 </template>
 
@@ -28,10 +29,10 @@ import {intervalList} from '@/constants/intervalList';
 import {categoryList} from '@/constants/categoryList';
 import dayjs from 'dayjs';
 import clone from '@/libs/clone';
-
+const Echarts: any = require('vue-echarts').default;
 @Component({
   components: {
-    Layout, Category,
+    Layout, Category,Echarts
   }
 })
 export default class Statistics extends Vue {
@@ -63,7 +64,42 @@ export default class Statistics extends Vue {
   get recordList() {
     return (this.$store.state as RootState).recordList;
   }
-
+  get x(){
+    return {
+      title:{
+        text:'111123'
+      },
+      legend:{
+        data:['line']
+      },
+      polar:{
+        center:['50%','54%']
+      },
+      tooltip:{
+        trigger:'axis',
+        axiPointer:{
+          type:'cross'
+        }
+      },
+      angleAxis:{
+        type:'value',
+        startAngle:0
+      },
+      radiusAxis:{
+        min:0
+      },
+      series:[
+        {
+          coordinateSystem:'polar',
+          name:'line',
+          type:'line',
+          showSymbol:false,
+          // data:data
+        }
+      ],
+      // animationDuration2000
+    }
+  }
   get groupedList() {
     const {recordList} = this;
     if (recordList.length === 0) {return [];}
@@ -96,10 +132,11 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.noResult{
+.noResult {
   padding: 16px;
   text-align: center;
 }
+
 %item {
   padding: 8px 16px;
   line-height: 24px;

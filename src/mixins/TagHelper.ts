@@ -10,10 +10,11 @@ const map: { [key: string]: string } = {
 export class TagHelper extends Vue {
   createTag() {
     const tagName = window.prompt('请输入标签名');
-    if (!tagName) {return window.alert('标签名不能为空！');}
+    if (tagName === null) {return}
+    if(!tagName){return window.alert('标签名不能为空')}
     this.$store.commit('createTag', tagName);
     if (this.$store.state.createTagError) {
-        window.alert(map[this.$store.state.createTagError.message] || '发生未知错误');
+      window.alert(map[this.$store.state.createTagError.message] || '发生未知错误');
     }
   }
 }
